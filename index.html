@@ -10,37 +10,40 @@
 <body>
     <div class="container">
         <div class="todo">
-            <header class="header">
+            <header class="todo__header">
                 <h1>Todos</h1>
             </header>
 
-            <input type="text" name="new-todo" class="new-todo" placeholder="What needs to be done?">
-            <div class="checkbox-field checkbox-field--small">
-                <label class="checkbox-field__label">
-                    <input type="checkbox" class="checkbox-field__input">
-                    Mark all as complete
-                </label>
-            </div>
+            <div class="todo__content">
+                <input type="text" name="todo__new-todo-field" class="todo__new-todo-field" placeholder="What needs to be done?">
 
-            <div class="todo-items">
-                <ul>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                <div class="todo__complete-all-field checkbox-field checkbox-field--small">
+                    <label class="checkbox-field__label">
+                        <input type="checkbox" class="checkbox-field__input">
+                        Mark all as complete
+                    </label>
+                </div>
+
+                <ul class="todo-items">
+                    <li class="todo-item">
+                        <label class="todo-item__label">
+                            <input type="checkbox" name="todo-item__complete-checkbox" class="todo-item__complete-checkbox">
                             first
                         </label>
+                        <a class="todo-item__destroy"></a>
                     </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                    <li class="todo-item">
+                        <label class="todo-item__label">
+                            <input type="checkbox" name="todo-item__complete-checkbox" class="todo-item__complete-checkbox">
                             first
                         </label>
+                        <button class="todo-item__destroy"></button>
                     </li>
                 </ul>
             </div>
 
-            <div id="todo-status">
-                <span class="todo-count">3</span> items left
+            <div class="todo__summary">
+                <span class="todo__summary__total-count">3</span> items: <span class="todo__summary__complete-count">3</span> complete, <span class="todo__summary__remaining-count">3</span> left
             </div>
         </div>
     </div>
