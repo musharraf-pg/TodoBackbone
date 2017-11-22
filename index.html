@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="todo">
+            <header>
+                <h1>Todos</h1>
+            </header>
+
+            <input type="text" name="new-todo" id="new-todo" placeholder="What needs to be done?">
+            <label class="small">
+                    <input type="checkbox" name="all-complete-todo" id="all-complete-todo">
+                    Mark all as complete
+            </label>
+
+            <div id="todo-items">
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                            first
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                            first
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="todo-status">
+                <span class="todo-count">3</span> items left
+            </div>
+        </div>
+    </div>
+</body>
+</html>
