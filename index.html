@@ -9,19 +9,20 @@
 </head>
 <body>
     <div class="container">
-
         <div class="todo">
-            <header>
+            <header class="header">
                 <h1>Todos</h1>
             </header>
 
-            <input type="text" name="new-todo" id="new-todo" placeholder="What needs to be done?">
-            <label class="small">
-                    <input type="checkbox" name="all-complete-todo" id="all-complete-todo">
+            <input type="text" name="new-todo" class="new-todo" placeholder="What needs to be done?">
+            <div class="checkbox-field checkbox-field--small">
+                <label class="checkbox-field__label">
+                    <input type="checkbox" class="checkbox-field__input">
                     Mark all as complete
-            </label>
+                </label>
+            </div>
 
-            <div id="todo-items">
+            <div class="todo-items">
                 <ul>
                     <li>
                         <label>

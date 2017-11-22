@@ -1,65 +1,54 @@
 body {
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(226, 226, 226);
-}
-
-header {
-    text-align: center;
-}
-
-div.todo {
-    padding: 1em;
-}
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e2e2e2; }
 
 .container {
-    max-width: 25em;
-    margin: 0 auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgb(172, 172, 172);
-}
+  max-width: 25em;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 10px #acacac; }
 
-/* New Todo Field */
-#new-todo {
+.todo {
+  padding: 1em;
+  /* New Todo Entry Field */ }
+  .todo .header {
+    text-align: center; }
+  .todo .new-todo {
+    display: block;
     box-sizing: border-box;
     width: 100%;
     font-size: 1em;
-    padding: .5em;
-}
+    padding: .5em; }
+  .todo .checkbox-field--small {
+    font-size: .75em; }
+  .todo .todo-items {
+    margin: 1em 0; }
 
-/* Mark all as completed field */
-.small {
-    font-size: .75em;
-}
+.todo-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
 
-#todo-items {
-    margin: 1em 0;
-}
+.todo-items ul li {
+  font-size: 1.5em;
+  padding: .5em 0;
+  border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
+  position: relative; }
 
-#todo-items ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+.todo-items ul li label {
+  margin-left: 1em; }
 
-#todo-items ul li {
-    font-size: 1.5em;
-    padding: .5em 0;
-    border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
-    position: relative;
-}
-#todo-items ul li label {
-    margin-left: 1em;
-}
 .todo-item-checkbox {
-    margin: 0;
-    left: 0;
-    position: absolute;        
-    top: 50%;
-    transform: translateY(-50%);
-    margin-right: 5em;
-}
+  margin: 0;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 5em; }
+
 #todo-status {
-    background-color: rgb(215, 231, 188);
-}
+  background-color: #d7e7bc; }
+
+/*# sourceMappingURL=style.css.map */
