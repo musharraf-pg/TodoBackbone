@@ -30,7 +30,7 @@ body {
   font-size: 1em;
   padding: .5em; }
 
-.checkbox-field--small {
+.todo__complete-all-field {
   font-size: .75em; }
 
 .todo-items {
@@ -73,11 +73,11 @@ body {
 .todo-item:hover .todo-item__destroy {
   display: block; }
 
-.todo__summary {
+.todo-summary {
   padding: .5em 1em;
   background-color: #d7e7bc; }
 
-.todo__summary__total-count, .todo__summary__complete-count, .todo__summary__remaining-count {
+.todo-summary__count {
   font-weight: bolder; }
 
 /*# sourceMappingURL=style.css.map */
