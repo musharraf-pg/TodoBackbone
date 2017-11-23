@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+
+
+
+    <script src="app.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,11 +19,11 @@
             </header>
 
             <div class="todo__content">
-                <input type="text" name="todo__new-todo-field" class="todo__new-todo-field" placeholder="What needs to be done?">
+                <input type="text" class="todo__new-todo-field" placeholder="What needs to be done?">
 
-                <div class="todo__complete-all-field checkbox-field checkbox-field--small">
-                    <label class="checkbox-field__label">
-                        <input type="checkbox" class="checkbox-field__input">
+                <div class="todo__complete-all-field">
+                    <label>
+                        <input type="checkbox">
                         Mark all as complete
                     </label>
                 </div>
@@ -42,8 +46,8 @@
                 </ul>
             </div>
 
-            <div class="todo__summary">
-                <span class="todo__summary__total-count">3</span> items: <span class="todo__summary__complete-count">3</span> complete, <span class="todo__summary__remaining-count">3</span> left
+            <div class="todo-summary">
+                <span class="todo-summary__count total-count">3</span> items: <span class="todo-summary__count complete-count">1</span> complete, <span class="todo-summary__count remaining-count">2</span> left
             </div>
         </div>
     </div>

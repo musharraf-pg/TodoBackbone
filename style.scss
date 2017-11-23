@@ -38,9 +38,6 @@ body {
 }
 
 .todo__complete-all-field {
-    
-}
-.checkbox-field--small {
     font-size: .75em;
 }
 
@@ -57,12 +54,15 @@ body {
     border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
     position: relative;
 }
+
 .todo-item:last-child {
     border-bottom: none;
 }
+
 .todo-item__label {
     margin-left: 1em;
 }
+
 .todo-item__complete-checkbox {
     margin: 0;
     left: 0;
@@ -71,6 +71,7 @@ body {
     transform: translateY(-50%);
     margin-right: 5em;
 }
+
 .todo-item__destroy {
     display: none;
     background-image: url(x.png);
@@ -86,13 +87,16 @@ body {
 
     cursor:pointer;
 }
+
 .todo-item:hover .todo-item__destroy {
     display: block;
 }
-.todo__summary {
+
+.todo-summary {
     padding: .5em 1em;
     background-color: rgb(215, 231, 188);
 }
-.todo__summary__total-count, .todo__summary__complete-count, .todo__summary__remaining-count {
+
+.todo-summary__count {
     font-weight: bolder;
 }
