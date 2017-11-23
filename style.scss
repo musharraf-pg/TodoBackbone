@@ -1,0 +1,102 @@
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(226, 226, 226);
+}
+
+.container {
+    max-width: 25em;
+    margin: 1em auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgb(172, 172, 172);
+}
+
+.todo {
+    margin-top: .5em;
+    padding-top: .5em;
+}
+
+.todo__content {
+    padding: 1em;
+}
+
+.todo__header {
+    text-align: center;
+}
+
+/* New Todo Entry Field */
+.todo__new-todo-field {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1em;
+    padding: .5em;
+}
+
+.todo__complete-all-field {
+    font-size: .75em;
+}
+
+.todo-items {
+    margin: 1em 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    font-size: 1.5em;
+    padding: .5em 0;
+    border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
+    position: relative;
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-item__label {
+    margin-left: 1em;
+}
+
+.todo-item__complete-checkbox {
+    margin: 0;
+    left: 0;
+    position: absolute;        
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 5em;
+}
+
+.todo-item__destroy {
+    display: none;
+    background-image: url(x.png);
+    
+    width: 20px;
+    height: 20px;
+    right: 0;
+    
+    // Center vertically
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    cursor:pointer;
+}
+
+.todo-item:hover .todo-item__destroy {
+    display: block;
+}
+
+.todo-summary {
+    padding: .5em 1em;
+    background-color: rgb(215, 231, 188);
+}
+
+.todo-summary__count {
+    font-weight: bolder;
+}

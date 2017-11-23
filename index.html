@@ -6,40 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+
+
+
+    <script src="app.js"></script>
 </head>
 <body>
     <div class="container">
-
         <div class="todo">
-            <header>
+            <header class="todo__header">
                 <h1>Todos</h1>
             </header>
 
-            <input type="text" name="new-todo" id="new-todo" placeholder="What needs to be done?">
-            <label class="small">
-                    <input type="checkbox" name="all-complete-todo" id="all-complete-todo">
-                    Mark all as complete
-            </label>
+            <div class="todo__content">
+                <input type="text" class="todo__new-todo-field" placeholder="What needs to be done?">
 
-            <div id="todo-items">
-                <ul>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                <div class="todo__complete-all-field">
+                    <label>
+                        <input type="checkbox">
+                        Mark all as complete
+                    </label>
+                </div>
+
+                <ul class="todo-items">
+                    <li class="todo-item">
+                        <label class="todo-item__label">
+                            <input type="checkbox" class="todo-item__complete-checkbox">
                             first
                         </label>
+                        <a class="todo-item__destroy"></a>
                     </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="todo-item-checkbox" class="todo-item-checkbox">
+                    <li class="todo-item">
+                        <label class="todo-item__label">
+                            <input type="checkbox" class="todo-item__complete-checkbox">
                             first
                         </label>
+                        <button class="todo-item__destroy"></button>
                     </li>
                 </ul>
             </div>
 
-            <div id="todo-status">
-                <span class="todo-count">3</span> items left
+            <div class="todo-summary">
+                <span class="todo-summary__count total-count">3</span> items: <span class="todo-summary__count complete-count">1</span> complete, <span class="todo-summary__count remaining-count">2</span> left
             </div>
         </div>
     </div>
