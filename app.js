@@ -13,7 +13,7 @@ app.Models.TodoItem = Backbone.Model.extend({
 
 app.Collections.TodoItems = Backbone.Collection.extend({
     model: app.Models.TodoItem,
-    localStorage: new Store("backbone-todo")
+    // localStorage: new Store("backbone-todo")
 })
 
 app.Views.TodoApp = Backbone.View.extend({
@@ -29,9 +29,10 @@ app.Views.TodoApp = Backbone.View.extend({
 app.Views.TodoItem = Backbone.View.extend({
     tagName: "li",
     className: "todo-item",
-    // template: _.template(...),
+    template: Handlebars.compile($("#todo-item-template").html()),
     render: function() {
-
+        this.$el.html(this.template(this.model.toJSON()))
+        return this.$el;
     }
 });
 app.Views.TodoItems = Backbone.View.extend({
@@ -40,11 +41,26 @@ app.Views.TodoItems = Backbone.View.extend({
         // this.listenTo(this.collection, "add", );
         // this.listenTo(this.collection, "remove", );
 
-        app.todoItems.fetch();        
+        // app.todoItems.fetch();
+        this.render();
+    },
+    render: function() {
+        this.$el.html('');  // clear children
+        
+        let todoViews = this.collection.map(todoItem => {
+            return (new app.Views.TodoItem({model: todoItem})).render();
+        });
+        this.$el.append(todoViews);
+
+        return this.$el;
     }
 });
 
-app.todoItems = new app.Collections.TodoItems();
+app.todoItems = new app.Collections.TodoItems([
+    {title: "AAA"},
+    {title: "BBB"},
+    {title: "CCC"}
+]);
 
 app.todoAppView = new app.Views.TodoApp();
 app.todoItemsView = new app.Views.TodoItems({collection: app.todoItems});
