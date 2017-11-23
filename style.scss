@@ -52,7 +52,8 @@ body {
     font-size: 1.5em;
     padding: .5em 0;
     border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
-    position: relative;
+    display: flex;
+    align-items: center;    
 }
 
 .todo-item:last-child {
@@ -60,16 +61,11 @@ body {
 }
 
 .todo-item__label {
-    margin-left: 1em;
+    flex: 1;
 }
 
 .todo-item__complete-checkbox {
-    margin: 0;
-    left: 0;
-    position: absolute;        
-    top: 50%;
-    transform: translateY(-50%);
-    margin-right: 5em;
+    margin-right: .5em;
 }
 
 .todo-item__destroy {
@@ -79,11 +75,6 @@ body {
     width: 20px;
     height: 20px;
     right: 0;
-    
-    // Center vertically
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
 
     cursor:pointer;
 }
