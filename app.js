@@ -6,7 +6,7 @@ var app = {
 
 app.Models.TodoItem = Backbone.Model.extend({
     defaults: {
-        // title: "",
+        title: undefined,
         completed: false
     }
 });
@@ -16,51 +16,78 @@ app.Collections.TodoItems = Backbone.Collection.extend({
     // localStorage: new Store("backbone-todo")
 })
 
-app.Views.TodoApp = Backbone.View.extend({
+app.Views.TodoAppView = Backbone.View.extend({
     el: ".todo",
     initialize: function() {
-        this.newTodoField = this.$(".todo__new-todo-field");
+        
+        const todoItemsCollection = new app.Collections.TodoItems([
+            {title: "AAA"},
+            {title: "BBB"},
+            {title: "CCC"}
+        ]);
+        const todoListView = new app.Views.ToDoListView({collection: todoItemsCollection});
+        this.subviews = [todoListView];
+
+        this.render();
+    },
+    template: Handlebars.compile($("#todo-app-template").html()),
+    render: function() {
+        console.log("rendering app view");
+
+        this.$el.html(this.template());
+
+        this.todoContent = this.$(".js-todo-content");
+        this.newTodoField = this.$(".js-new-todo");
         this.markAllCompleteField = this.$(".mark-all-complete");
         this.totalCount = this.$(".total-count");
         this.remainingCount = this.$(".remaining-count");
         this.completeCount = this.$(".complete-count");
-    }
+
+        this.todoContent.append(this.subviews[0].render());
+
+        return this.$el;
+    },
+
 });
-app.Views.TodoItem = Backbone.View.extend({
+app.Views.ToDoItemView = Backbone.View.extend({
     tagName: "li",
     className: "todo-item",
     template: Handlebars.compile($("#todo-item-template").html()),
     render: function() {
+        console.log("rendering item view: ", this.model);
+
         this.$el.html(this.template(this.model.toJSON()))
         return this.$el;
     }
 });
-app.Views.TodoItems = Backbone.View.extend({
-    el: ".todo-items",
+app.Views.ToDoListView = Backbone.View.extend({
+    tagName: "ul",
+    className: ".todo-items",
     initialize: function() {
         // this.listenTo(this.collection, "add", );
         // this.listenTo(this.collection, "remove", );
 
         // app.todoItems.fetch();
-        this.render();
+        this.subviews = [];
     },
     render: function() {
-        this.$el.html('');  // clear children
-        
-        let todoViews = this.collection.map(todoItem => {
-            return (new app.Views.TodoItem({model: todoItem})).render();
+        console.log("rendering list view: ", this.collection);
+
+        this.empty();
+         
+        const todoItemViews = this.collection.map(todoItem => {
+            const todoItemView = new app.Views.ToDoItemView({model: todoItem});
+            return todoItemView.render();
         });
-        this.$el.append(todoViews);
+        this.$el.append(todoItemViews);
 
         return this.$el;
+    },
+    empty: function() {
+        this.subviews.forEach(subview => {
+            subview.remove();
+        });
     }
 });
 
-app.todoItems = new app.Collections.TodoItems([
-    {title: "AAA"},
-    {title: "BBB"},
-    {title: "CCC"}
-]);
-
-app.todoAppView = new app.Views.TodoApp();
-app.todoItemsView = new app.Views.TodoItems({collection: app.todoItems});
+app.todoAppView = new app.Views.TodoAppView();
