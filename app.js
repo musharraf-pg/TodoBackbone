@@ -14,7 +14,7 @@ app.Models.TodoItem = Backbone.Model.extend({
 app.Collections.TodoItems = Backbone.Collection.extend({
     model: app.Models.TodoItem,
     // localStorage: new Store("backbone-todo")
-})
+});
 
 app.Views.TodoAppView = Backbone.View.extend({
     el: ".todo",
@@ -25,7 +25,7 @@ app.Views.TodoAppView = Backbone.View.extend({
             {title: "BBB"},
             {title: "CCC"}
         ]);
-        const todoListView = new app.Views.ToDoListView({collection: todoItemsCollection});
+        this.todoListView = new app.Views.ToDoListView({collection: todoItemsCollection});
         this.subviews = [todoListView];
 
         this.render();
@@ -39,15 +39,11 @@ app.Views.TodoAppView = Backbone.View.extend({
         this.todoContent = this.$(".js-todo-content");
         this.newTodoField = this.$(".js-new-todo");
         this.markAllCompleteField = this.$(".mark-all-complete");
-        this.totalCount = this.$(".total-count");
-        this.remainingCount = this.$(".remaining-count");
-        this.completeCount = this.$(".complete-count");
 
-        this.todoContent.append(this.subviews[0].render());
+        this.todoContent.append(this.todoListView.render());
 
         return this.$el;
-    },
-
+    }
 });
 app.Views.ToDoItemView = Backbone.View.extend({
     tagName: "li",
@@ -74,12 +70,12 @@ app.Views.ToDoListView = Backbone.View.extend({
         console.log("rendering list view: ", this.collection);
 
         this.empty();
-         
-        const todoItemViews = this.collection.map(todoItem => {
-            const todoItemView = new app.Views.ToDoItemView({model: todoItem});
-            return todoItemView.render();
+        
+        this.collection.forEach(todoItem => {
+            const view = new app.Views.ToDoItemView({model: todoItem});
+            this.subviews.push(view);
+            this.$el.append(view.render());
         });
-        this.$el.append(todoItemViews);
 
         return this.$el;
     },
@@ -87,6 +83,7 @@ app.Views.ToDoListView = Backbone.View.extend({
         this.subviews.forEach(subview => {
             subview.remove();
         });
+        this.subviews = [];
     }
 });
 
