@@ -60,18 +60,52 @@ app.Views.TodoAppView = Backbone.View.extend({
 app.Views.ToDoItemView = Backbone.View.extend({
     tagName: "li",
     className: "todo-item",
+    initialize: function() {
+        // this.listenTo(this.model, "destroy", this.remove);  // is this needed even though list view already listens for remove
+        this.listenTo(this.model, "change", this.render);
+    },
     events: {
-        "click .js-delete-btn": "delete"
+        "click .js-delete-btn": "delete",
+        "dblclick .js-item-label": "startEditing",
+        "blur .js-edit-input": "finishEditing",        
+        "keypress .js-edit-input": "finishEditingOnEnter",
+        "change .js-complete-checkbox": "updateCompleted"
     },
     template: Handlebars.compile($("#todo-item-template").html()),
     render: function() {
         console.log("rendering item view: ", this.model);
 
         this.$el.html(this.template(this.model.toJSON()))
+
+        this.editInput = this.$(".js-edit-input");
+        this.completeCheckbox = this.$(".js-complete-checkbox");
+
         return this.$el;
     },
     delete: function() {
         this.model.destroy();
+    },
+    startEditing: function() {
+        this.editInput.val(this.model.get("title"));
+        this.$el.addClass("editing");
+        this.editInput.focus();
+    },
+    finishEditingOnEnter: function(e) {
+        if (e.which == 13) {
+            this.finishEditing();
+        }
+    },
+    finishEditing: function() {
+        this.model.set({
+            title: this.editInput.val().trim()
+        })
+
+        this.$el.removeClass("editing");
+    },
+    updateCompleted: function() {
+        this.model.set({
+            completed: this.completeCheckbox.prop("checked")
+        });
     }
 });
 app.Views.ToDoListView = Backbone.View.extend({
