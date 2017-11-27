@@ -7,7 +7,8 @@ var app = {
 app.Models.TodoItem = Backbone.Model.extend({
     defaults: {
         title: undefined,
-        completed: false
+        completed: false,
+        editing: false
     }
 });
 
@@ -83,9 +84,7 @@ app.Views.ToDoItemView = Backbone.View.extend({
         this.model.destroy();
     },
     startEditing: function () {
-        this.editInput.val(this.model.get("title"));
-        this.$el.addClass("todo-item--editing");
-        this.editInput.focus();
+        this.model.set('editing', true);
     },
     finishEditingOnEnter: function (event) {
         if (event.which === 13) {
@@ -96,8 +95,7 @@ app.Views.ToDoItemView = Backbone.View.extend({
         this.model.set({
             title: this.editInput.val().trim()
         })
-
-        this.$el.removeClass("todo-item--editing");
+        this.model.set('editing', false);
     },
     updateCompleted: function () {
         this.model.set({

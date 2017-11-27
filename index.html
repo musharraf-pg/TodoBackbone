@@ -50,12 +50,15 @@
     </script>
 
     <script type="text/template" id="todo-item-template">
-        <input type="checkbox" class="todo-item__complete-checkbox js-complete-checkbox" {{#if completed}} checked {{/if}}>
-        <label class="todo-item__label js-item-label">
-            {{title}}
-        </label>
-        <input type="text" class="todo-item__edit-input js-edit-input">
-        <a class="todo-item__destroy js-delete-btn"></a>
+        {{#unless editing}}
+            <input type="checkbox" class="todo-item__complete-checkbox js-complete-checkbox" {{#if completed}} checked {{/if}}>
+            <label class="todo-item__label js-item-label">
+                {{title}}
+            </label>
+            <a class="todo-item__destroy js-delete-btn"></a>
+        {{else}}
+            <input type="text" class="todo-item__edit-input js-edit-input" value="{{title}}" autofocus>
+        {{/unless}}
     </script>
 
     <script src="app.js"></script>

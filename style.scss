@@ -73,21 +73,13 @@ body {
 .todo-item__edit-input {
     flex: 1;
     font-size: 1em;
-    display: none;
+    display: block;
 }
 
 // Todo item edit state
-.todo-item--editing {
-    .todo-item__edit-input {
-        display: block;
-    }
-    .todo-item__label {
-        display: none;
-    }
-    .todo-item__complete-checkbox {
-        display: none;
-    }
-}
+// .todo-item__edit-input {
+//     display: block;
+// }
 
 .todo-item__complete-checkbox {
     margin-right: .5em;
