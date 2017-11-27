@@ -18,6 +18,7 @@ app.Collections.TodoItems = Backbone.Collection.extend({
 
 app.Views.TodoAppView = Backbone.View.extend({
     el: ".todo",
+    template: Handlebars.compile($("#todo-app-template").html()),    
     initialize: function() {
         
         const todoItemsCollection = new app.Collections.TodoItems([
@@ -25,15 +26,15 @@ app.Views.TodoAppView = Backbone.View.extend({
             {title: "BBB"},
             {title: "CCC"}
         ]);
-        this.todoListView = new app.Views.ToDoListView({collection: todoItemsCollection});
-        this.subviews = [this.todoListView];
+        this.subviews = {
+            todoListView: new app.Views.ToDoListView({collection: todoItemsCollection})
+        };
 
         this.render();
     },
     events: {
         "keypress .js-new-todo": "createTodoOnEnter"
     },
-    template: Handlebars.compile($("#todo-app-template").html()),
     render: function() {
         console.log("rendering app view");
 
@@ -43,7 +44,7 @@ app.Views.TodoAppView = Backbone.View.extend({
         this.newTodoField = this.$(".js-new-todo");
         this.markAllCompleteField = this.$(".mark-all-complete");
 
-        this.todoContent.append(this.todoListView.render());
+        this.todoContent.append(this.subviews.todoListView.render());
 
         return this.$el;
     },
@@ -51,7 +52,7 @@ app.Views.TodoAppView = Backbone.View.extend({
         const title = this.newTodoField.val().trim();
         if (e.which == 13 && title != "") {
 
-            this.todoListView.collection.add(new app.Models.TodoItem({
+            this.subviews.todoListView.collection.add(new app.Models.TodoItem({
                 title: title
             }));
         }
@@ -116,26 +117,28 @@ app.Views.ToDoListView = Backbone.View.extend({
         this.listenTo(this.collection, "remove", this.render);
 
         // app.todoItems.fetch();
-        this.subviews = [];
+        this.subviews = {
+            todoItems: []
+        };
     },
     render: function() {
         console.log("rendering list view: ", this.collection);
 
-        this.empty();
+        this.removeSubviews();
         
         this.collection.forEach(todoItem => {
             const view = new app.Views.ToDoItemView({model: todoItem});
-            this.subviews.push(view);
+            this.subviews.todoItems.push(view);
             this.$el.append(view.render());
         });
 
         return this.$el;
     },
-    empty: function() {
-        this.subviews.forEach(subview => {
+    removeSubviews: function() {
+        this.subviews.todoItems.forEach(subview => {
             subview.remove();
         });
-        this.subviews = [];
+        this.subviews.todoItems = [];
     }
 });
 
