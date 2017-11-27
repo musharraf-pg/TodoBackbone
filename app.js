@@ -13,29 +13,27 @@ app.Models.TodoItem = Backbone.Model.extend({
 
 app.Collections.TodoItems = Backbone.Collection.extend({
     model: app.Models.TodoItem,
-    // localStorage: new Store("backbone-todo")
 });
 
 app.Views.TodoAppView = Backbone.View.extend({
     el: ".todo",
-    template: Handlebars.compile($("#todo-app-template").html()),    
-    initialize: function() {
-        
+    template: Handlebars.compile($("#todo-app-template").html()),
+    events: {
+        "keypress .js-new-todo": "createTodoOnEnter"
+    },
+    initialize: function () {
         const todoItemsCollection = new app.Collections.TodoItems([
-            {title: "AAA"},
-            {title: "BBB"},
-            {title: "CCC"}
+            { title: "AAA" },
+            { title: "BBB" },
+            { title: "CCC" }
         ]);
         this.subviews = {
-            todoListView: new app.Views.ToDoListView({collection: todoItemsCollection})
+            todoListView: new app.Views.ToDoListView({ collection: todoItemsCollection })
         };
 
         this.render();
     },
-    events: {
-        "keypress .js-new-todo": "createTodoOnEnter"
-    },
-    render: function() {
+    render: function () {
         console.log("rendering app view");
 
         this.$el.html(this.template());
@@ -48,12 +46,11 @@ app.Views.TodoAppView = Backbone.View.extend({
 
         return this.$el;
     },
-    createTodoOnEnter: function(e) {
+    createTodoOnEnter: function (event) {
         const title = this.newTodoField.val().trim();
-        if (e.which == 13 && title != "") {
-
+        if (event.which === 13 && title !== "") {
             this.subviews.todoListView.collection.add(new app.Models.TodoItem({
-                title: title
+                title
             }));
         }
     }
@@ -61,19 +58,18 @@ app.Views.TodoAppView = Backbone.View.extend({
 app.Views.ToDoItemView = Backbone.View.extend({
     tagName: "li",
     className: "todo-item",
-    initialize: function() {
-        // this.listenTo(this.model, "destroy", this.remove);  // is this needed even though list view already listens for remove
-        this.listenTo(this.model, "change", this.render);
-    },
+    template: Handlebars.compile($("#todo-item-template").html()),
     events: {
         "click .js-delete-btn": "delete",
         "dblclick .js-item-label": "startEditing",
-        "blur .js-edit-input": "finishEditing",        
+        "blur .js-edit-input": "finishEditing",
         "keypress .js-edit-input": "finishEditingOnEnter",
         "change .js-complete-checkbox": "updateCompleted"
     },
-    template: Handlebars.compile($("#todo-item-template").html()),
-    render: function() {
+    initialize: function () {
+        this.listenTo(this.model, "change", this.render);
+    },
+    render: function () {
         console.log("rendering item view: ", this.model);
 
         this.$el.html(this.template(this.model.toJSON()))
@@ -83,27 +79,27 @@ app.Views.ToDoItemView = Backbone.View.extend({
 
         return this.$el;
     },
-    delete: function() {
+    delete: function () {
         this.model.destroy();
     },
-    startEditing: function() {
+    startEditing: function () {
         this.editInput.val(this.model.get("title"));
-        this.$el.addClass("editing");
+        this.$el.addClass("todo-item--editing");
         this.editInput.focus();
     },
-    finishEditingOnEnter: function(e) {
-        if (e.which == 13) {
+    finishEditingOnEnter: function (event) {
+        if (event.which === 13) {
             this.finishEditing();
         }
     },
-    finishEditing: function() {
+    finishEditing: function () {
         this.model.set({
             title: this.editInput.val().trim()
         })
 
-        this.$el.removeClass("editing");
+        this.$el.removeClass("todo-item--editing");
     },
-    updateCompleted: function() {
+    updateCompleted: function () {
         this.model.set({
             completed: this.completeCheckbox.prop("checked")
         });
@@ -112,29 +108,27 @@ app.Views.ToDoItemView = Backbone.View.extend({
 app.Views.ToDoListView = Backbone.View.extend({
     tagName: "ul",
     className: ".todo-items",
-    initialize: function() {
-        this.listenTo(this.collection, "add", this.render);
-        this.listenTo(this.collection, "remove", this.render);
+    initialize: function () {
+        this.listenTo(this.collection, "add remove", this.render);
 
-        // app.todoItems.fetch();
         this.subviews = {
             todoItems: []
         };
     },
-    render: function() {
+    render: function () {
         console.log("rendering list view: ", this.collection);
 
         this.removeSubviews();
-        
+
         this.collection.forEach(todoItem => {
-            const view = new app.Views.ToDoItemView({model: todoItem});
+            const view = new app.Views.ToDoItemView({ model: todoItem });
             this.subviews.todoItems.push(view);
             this.$el.append(view.render());
         });
 
         return this.$el;
     },
-    removeSubviews: function() {
+    removeSubviews: function () {
         this.subviews.todoItems.forEach(subview => {
             subview.remove();
         });
