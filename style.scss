@@ -76,11 +76,6 @@ body {
     display: block;
 }
 
-// Todo item edit state
-// .todo-item__edit-input {
-//     display: block;
-// }
-
 .todo-item__complete-checkbox {
     margin-right: .5em;
 }
@@ -95,10 +90,6 @@ body {
 
     cursor:pointer;
 }
-
-// .todo-item:hover .todo-item__destroy, .todo-item:focus .todo-item__destroy {
-//     display: block;
-// }
 
 .todo-summary {
     padding: .5em 1em;
