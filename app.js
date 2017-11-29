@@ -132,6 +132,7 @@ app.Views.ToDoListView = Backbone.View.extend({
         });
         this.subviews.todoItems = [];
     }
+    
 });
 
 app.todoAppView = new app.Views.TodoAppView();

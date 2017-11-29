@@ -7,16 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-
-
-
-
 </head>
 
 <body>
-    <div class="container">
-        <div class="todo"></div>
-    </div>
+    <div class="todo"></div>
 
     <!-- ========= -->
     <!-- Libraries -->
@@ -30,20 +24,15 @@
 
     <script type="text/template" id="todo-app-template">
             <header class="todo__header">
-                <h1>Todos</h1>
+                <h1>todos</h1>
             </header>
 
             <div class="todo__content js-todo-content">
-                <input type="text" class="todo__new-todo-field js-new-todo" placeholder="What needs to be done?">
 
-                <div class="todo__complete-all-field">
-                    <label>
-                        <input type="checkbox" class="mark-all-complete">
-                        Mark all as complete
-                    </label>
+                <div class="todo__create-update-fields">
+                    <input type="checkbox" class="todo__mark-all-complete">
+                    <input type="text" class="todo__new-todo-entry js-new-todo" placeholder="What needs to be done?">
                 </div>
-
-                
             </div>
 
             <div class="todo-summary">
