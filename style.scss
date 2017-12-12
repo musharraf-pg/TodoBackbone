@@ -1,44 +1,84 @@
-body, h1, ul {
+@mixin placeholder {
+    ::-webkit-input-placeholder {@content}
+    :-moz-placeholder           {@content}
+    ::-moz-placeholder          {@content}
+    :-ms-input-placeholder      {@content}  
+}
+
+body, h1, ul, input {
     margin: 0;
     padding: 0;
+    font-weight: unset;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(226, 226, 226);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f5f5f5;
+    font-weight: 300;
 }
 
+
 .container {
-    max-width: 25em;
-    margin: 1em auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgb(172, 172, 172);
+    // margin: 1em auto;
+    // background-color: white;
+    // box-shadow: 0 0 10px rgb(172, 172, 172);
 }
 
 .todo {
+    margin: 0 auto;
+    max-width: 550px;    
     margin-top: .5em;
     padding-top: .5em;
 }
 
 .todo__content {
-    padding: 1em;
+    background: white;
+}
+.todo__create-update-fields {
+    display: flex;
+    align-items: center;
 }
 
 .todo__header {
     text-align: center;
+    color: rgba(175, 47, 47, 0.15);
+    font-weight: 100;
+    font-size: 3em;
 }
 
 /* New Todo Entry Field */
-.todo__new-todo-field {
+.todo__new-todo-entry {
     display: block;
     box-sizing: border-box;
     width: 100%;
-    font-size: 1em;
-    padding: .5em;
+    font-size: 24px;
+    font-weight: 100;
+    font-style: italic;
+    color: rgb(77,77,77);
+    padding: 16px 16px 16px 60px;
+    border: none;
+    background-color: rgba(0,0,0,0.004);
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+    outline: none;
+
+    flex: 1;
+    &::-webkit-input-placeholder {
+        opacity: .2;
+    }
+    
 }
 
-.todo__complete-all-field {
-    font-size: .75em;
+.todo__mark-all-complete {
+    width: 60px;
+    height: 34px;
+    -webkit-appearance: none;
+}
+.todo__mark-all-complete:after {
+    width: 60px;
+    height: 34px;
+    -webkit-appearance: none;
+    content: '⌄';
+    font-size: 5em;
 }
 
 .todo-items {
@@ -51,7 +91,7 @@ body {
 .todo-item {
     font-size: 1.5em;
     padding: .5em 0;
-    border-bottom: 1px rgba(128, 128, 128, 0.342) solid;
+    border-top: 1px #ededed solid;
     display: flex;
     align-items: center;
 
@@ -62,9 +102,9 @@ body {
     }
 }
 
-.todo-item:last-child {
-    border-bottom: none;
-}
+// .todo-item:last-child {
+//     border-bottom: none;
+// }
 
 .todo-item__label {
     flex: 1;
@@ -77,7 +117,26 @@ body {
 }
 
 .todo-item__complete-checkbox {
-    margin-right: .5em;
+    width: 40px;
+    height: 40px;
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    margin-right: 1em;
+    // margin: 0 .5em;
+
+    // &:checked {
+    //     content: "hello";
+    //     border: 1px solid red;
+    // }
+
+    &::after {
+        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
+    }
+    &:checked::after {
+        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+    }
 }
 
 .todo-item__destroy {
@@ -92,10 +151,13 @@ body {
 }
 
 .todo-summary {
-    padding: .5em 1em;
-    background-color: rgb(215, 231, 188);
+    padding: 10px 15px;
+    background-color: white;
+    border-top: 1px #ededed solid;
+    color: #777;
+    font-size: 14px;
 }
 
-.todo-summary__count {
-    font-weight: bolder;
-}
+// .todo-summary__count {
+//     font-weight: bolder;
+// }
