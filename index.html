@@ -27,17 +27,29 @@
                 <h1>todos</h1>
             </header>
 
-            <div class="todo__content js-todo-content">
-
+            <div class="todo__body">
                 <div class="todo__create-update-fields">
                     <input type="checkbox" class="todo__mark-all-complete">
                     <input type="text" class="todo__new-todo-entry js-new-todo" placeholder="What needs to be done?">
                 </div>
+                
+                <div class="js-todo-content">
+                </div>
+
+                <div class="todo-footer">
+                        <p class="todo-footer__count remaining-count">0 items left</p>
+                        <div class="todo-footer__filter-categories">
+                            <a href="#" class="todo-footer__filter-category todo-footer__filter-category--selected">All</a>
+                            <a href="#" class="todo-footer__filter-category">Active</a>
+                            <a href="#" class="todo-footer__filter-category">Completed</a>
+                        </div>
+                        <a href="#" class="todo-footer__clear-completed">
+                            Clear completed
+                        </a>
+                </div>
             </div>
 
-            <div class="todo-summary">
-                <span class="todo-summary__count total-count">3</span> items: <span class="todo-summary__count complete-count">1</span> complete, <span class="todo-summary__count remaining-count">2</span> left
-            </div>
+
     </script>
 
     <script type="text/template" id="todo-item-template">
